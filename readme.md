@@ -109,12 +109,5 @@ Rules:
 
 ---
 
-## 📘 Full Documentation
-A complete documentation website is available here:
-
-**(Insert your link here)**
-
----
-
 ## 📄 License
-Open-source and free to modify or distribute as long as credit is preserved.
+→ https://github.com/LiverMods/KavoGG/blob/main/LICENSE.md ←
