@@ -11,7 +11,6 @@
 
 <div class="container">
 
-  <!-- HEADER -->
   <header>
     <div class="brand">
       <div class="logo">K</div>
@@ -35,10 +34,8 @@
     </div>
   </header>
 
-  <!-- MAIN GRID -->
   <main>
 
-    <!-- LEFT CONTENT -->
     <div class="card">
 
       <h2 data-en="Introduction" data-pt="Introdução">Introduction</h2>
@@ -47,8 +44,6 @@
         data-pt="KavoUI-GG é uma biblioteca moderna de UI para GameGuardian. Ela fornece menus estruturados, janelas flutuantes, toggles, sliders e inputs.">
       </p>
 
-
-      <!-- FEATURES -->
       <h2 data-en="Features" data-pt="Recursos">Features</h2>
 
       <div class="feature-grid">
@@ -66,66 +61,85 @@
         </div>
       </div>
 
-
-      <!-- INSTALLATION -->
       <h2 style="margin-top:20px" data-en="Installation" data-pt="Instalação">Installation</h2>
 
       <p class="muted" data-en="Local installation:" data-pt="Instalação local:"></p>
-
       <div class="example">
-      <pre><code>Kavo = loadfile("/storage/emulated/0/Download/KavoUI.lua")()</code></pre>
+        <pre><code>Kavo = loadfile("/storage/emulated/0/Download/KavoUI.lua")()</code></pre>
       </div>
+      <p class="small" data-en="Load the library locally from your device." data-pt="Carrega a biblioteca localmente do seu dispositivo."></p>
 
       <p class="muted" data-en="Online import:" data-pt="Importação online:"></p>
-
       <div class="example">
-      <pre><code>local function import(url)
+        <pre><code>local function import(url)
     return load(gg.makeRequest(url).content)()
 end
 
 Kavo = import("https://raw.githubusercontent.com/LiverMods/KavoGG/refs/heads/main/KavoUi.lua")</code></pre>
       </div>
+      <p class="small" data-en="Load the library directly from GitHub without downloading." data-pt="Carrega a biblioteca diretamente do GitHub sem precisar baixar."></p>
 
-
-      <!-- BASIC USAGE -->
       <h2 style="margin-top:20px" data-en="Basic Usage" data-pt="Uso Básico">Basic Usage</h2>
-
       <div class="example">
-      <pre><code>local UI = Kavo:CreateWindow("My Menu")
+        <pre><code>local UI = Kavo:CreateWindow("My Menu")
 local tab = UI:CreateTab("Main")
 local sec = tab:CreateSection("Features")</code></pre>
       </div>
+      <p class="small" data-en="Create a window, add a tab, and then create a section for UI elements." data-pt="Cria uma janela, adiciona uma aba e cria uma seção para os elementos de UI."></p>
 
-
-      <!-- ELEMENTS -->
-      <h2 style="margin-top:20px" data-en="Elements" data-pt="Elementos">Elements</h2>
-
+      <h2 style="margin-top:20px" data-en="Window" data-pt="Janela">Window</h2>
       <div class="example">
-      <pre><code>sec:AddButton("God Mode", function()
+        <pre><code>local UI = Kavo:CreateWindow("My Menu")</code></pre>
+      </div>
+      <p class="small" data-en="Creates a floating window with a title. Can contain tabs and sections." data-pt="Cria uma janela flutuante com título. Pode conter abas e seções."></p>
+
+      <h2 style="margin-top:20px" data-en="Tab" data-pt="Aba">Tab</h2>
+      <div class="example">
+        <pre><code>local tab = UI:CreateTab("Main")</code></pre>
+      </div>
+      <p class="small" data-en="Creates a tab inside a window to organize sections." data-pt="Cria uma aba dentro de uma janela para organizar seções."></p>
+
+      <h2 style="margin-top:20px" data-en="Section" data-pt="Seção">Section</h2>
+      <div class="example">
+        <pre><code>local sec = tab:CreateSection("Features")</code></pre>
+      </div>
+      <p class="small" data-en="Sections are containers for buttons, toggles, sliders, and inputs." data-pt="Seções são contêineres para botões, toggles, sliders e inputs."></p>
+
+      <h2 style="margin-top:20px" data-en="Button" data-pt="Botão">Button</h2>
+      <div class="example">
+        <pre><code>sec:AddButton("God Mode", function()
     gg.toast("Activated!")
-end)
+end)</code></pre>
+      </div>
+      <p class="small" data-en="Adds a clickable button. Executes the provided function when pressed." data-pt="Adiciona um botão clicável. Executa a função fornecida ao ser pressionado."></p>
 
-sec:AddToggle("Speed", false, function(state)
+      <h2 style="margin-top:20px" data-en="Toggle" data-pt="Toggle">Toggle</h2>
+      <div class="example">
+        <pre><code>sec:AddToggle("Speed", false, function(state)
     gg.toast("Speed: " .. tostring(state))
-end)
+end)</code></pre>
+      </div>
+      <p class="small" data-en="Adds a binary ON/OFF switch. `state` indicates the current value." data-pt="Adiciona um interruptor binário ON/OFF. `state` indica o valor atual."></p>
 
-sec:AddSlider("FOV", 10, 120, 60, function(value)
+      <h2 style="margin-top:20px" data-en="Slider" data-pt="Slider">Slider</h2>
+      <div class="example">
+        <pre><code>sec:AddSlider("FOV", 10, 120, 60, function(value)
     gg.toast("FOV = " .. value)
-end)
+end)</code></pre>
+      </div>
+      <p class="small" data-en="Adds a slider to select a numeric value within a range." data-pt="Adiciona um slider para selecionar um valor numérico dentro de um intervalo."></p>
 
-sec:AddInput("Player Name", "User", function(text)
+      <h2 style="margin-top:20px" data-en="Input" data-pt="Input">Input</h2>
+      <div class="example">
+        <pre><code>sec:AddInput("Player Name", "User", function(text)
     gg.toast("Name: " .. text)
 end)</code></pre>
       </div>
+      <p class="small" data-en="Adds a text input field. `text` is the user input." data-pt="Adiciona um campo de entrada de texto. `text` é a entrada do usuário."></p>
 
-
-      <!-- FULL EXAMPLES -->
-      <h2 style="margin-top:20px" data-en="Full Example" data-pt="Exemplo Completo">Full Example</h2>
-
-      <p class="small" data-en="Complete runnable script:" data-pt="Script completo executável:"></p>
-
+      <h2 style="margin-top:20px" data-en="Full Example (Local)" data-pt="Exemplo Completo (Local)">Full Example (Local)</h2>
       <div class="example">
-      <pre><code>local Kavo = loadfile("/storage/emulated/0/Download/KavoUI.lua")()
+        <pre><code>local Kavo = loadfile("/storage/emulated/0/Download/KavoUI.lua")()
 Kavo:Welcome("Welcome!")
 
 local win = Kavo:CreateWindow("My Menu")
@@ -143,6 +157,29 @@ end)
 win:Show()</code></pre>
       </div>
 
+      <h2 style="margin-top:20px" data-en="Full Example (Online)" data-pt="Exemplo Completo (Online)">Full Example (Online)</h2>
+      <div class="example">
+        <pre><code>local function import(url)
+    return load(gg.makeRequest(url).content)()
+end
+
+local Kavo = import("https://raw.githubusercontent.com/LiverMods/KavoGG/refs/heads/main/KavoUi.lua")
+Kavo:Welcome("Welcome Online!")
+
+local win = Kavo:CreateWindow("My Menu")
+local tab = win:CreateTab("Main")
+local sec  = tab:CreateSection("General")
+
+sec:AddButton("Hello", function()
+    gg.toast("Hello from online KavoUI!")
+end)
+
+sec:AddToggle("Fast Mode", false, function(state)
+    gg.toast("Fast Mode: " .. tostring(state))
+end)
+
+win:Show()</code></pre>
+      </div>
 
       <footer>
         © 2025 KavoUI-GG — Open Source
@@ -150,7 +187,6 @@ win:Show()</code></pre>
 
     </div>
 
-    <!-- SIDEBAR -->
     <div class="side">
       <div class="card">
         <h2 data-en="Download" data-pt="Download">Download</h2>
@@ -162,7 +198,6 @@ win:Show()</code></pre>
         </p>
 
         <h2 style="margin-top:20px" data-en="Welcome Alert" data-pt="Alerta de Boas-Vindas">Welcome Alert</h2>
-
         <pre><code>Kavo:Welcome(nil)
 Kavo:Welcome("")
 Kavo:Welcome("Hello!")</code></pre>
