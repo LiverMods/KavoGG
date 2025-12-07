@@ -37,7 +37,7 @@ local function import(url)
     return load(gg.makeRequest(url).content)()
 end
 
-Kavo = import("https://raw.githubusercontent.com/<username>/<repo>/main/KavoUI.lua")
+Kavo = import("https://raw.githubusercontent.com/LiverMods/KavoGG/refs/heads/main/KavoUi.lua")
 ```
 
 Replace `<username>` and `<repo>` with your GitHub names.
