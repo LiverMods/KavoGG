@@ -1,151 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>KavoUI GG — Documentation</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KavoUI-GG Documentation</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div class="logo">KavoUI GG</div>
 
-    <div class="lang-switch">
-      <img src="https://flagsapi.com/US/flat/32.png" id="flag-us" class="flag active" alt="EN">
-      <img src="https://flagsapi.com/BR/flat/32.png" id="flag-br" class="flag" alt="PT">
-    </div>
-  </header>
+    <header>
+        <h1>KavoUI-GG</h1>
+        <p class="subtitle">
+            A modern, structured, Roblox-inspired UI library for <strong>GameGuardian Lua scripts</strong>.
+            Designed for floating UI, clean navigation, toggles with icons, sliders, inputs, and more.
+        </p>
+    </header>
 
-  <main class="content">
-    <article class="card">
-
-      <h1 data-en="KavoUI for GameGuardian" data-pt="KavoUI para GameGuardian">KavoUI for GameGuardian</h1>
-
-      <p data-en="A modern, structured, Roblox-inspired UI library for GameGuardian scripts. Designed for clear navigation, dynamic elements, and non-blocking floating operation."
-         data-pt="Uma biblioteca UI moderna e inspirada no estilo do Roblox para scripts do GameGuardian. Projetada para navegação clara, elementos dinâmicos e operação flutuante não bloqueante.">
-      </p>
-
-      <!-- FEATURES -->
-      <section>
-        <h2 data-en="Key Features" data-pt="Principais Recursos">Key Features</h2>
+    <section>
+        <h2>✨ Features</h2>
         <ul>
-          <li data-en="Floating UI that does not block gameplay" data-pt="UI flutuante que não bloqueia o jogo">Floating UI</li>
-          <li data-en="Tabs → Sections → Elements structure" data-pt="Estrutura Tabs → Sections → Elementos">Structure</li>
-          <li data-en="Buttons, Toggles, Sliders, Inputs" data-pt="Botões, Toggles, Sliders, Inputs">Elements</li>
-          <li data-en="Automatic Back and Exit options" data-pt="Opções automáticas de Voltar e Sair">Navigation</li>
-          <li data-en="Optional welcome alert" data-pt="Alerta opcional de boas-vindas">Welcome alert</li>
+            <li>Floating UI mode (does not block gameplay)</li>
+            <li>Tab → Section → Element architecture</li>
+            <li>Buttons, Toggles, Sliders, Inputs</li>
+            <li>Emoji toggle indicators (🟢 / 🔴)</li>
+            <li>Automatic “Back” entries</li>
+            <li>Global “Exit” option</li>
+            <li>Optional dynamic welcome alert</li>
+            <li>Stable internal navigation</li>
+            <li>Zero dependencies</li>
+            <li>Online import via GitHub</li>
         </ul>
-      </section>
+    </section>
 
-      <!-- INSTALLATION -->
-      <section>
-        <h2 data-en="Installation" data-pt="Instalação">Installation</h2>
+    <section>
+        <h2>📦 Installation</h2>
 
-        <p data-en="Download the file named KavoUI.lua and store it anywhere on your device. Then load it in your script using loadfile()."
-           data-pt="Baixe o arquivo KavoUI.lua e salve em qualquer lugar do seu dispositivo. Depois carregue-o no seu script usando loadfile().">
-        </p>
+        <h3>Local File</h3>
+        <pre><code>Kavo = loadfile("/storage/emulated/0/Download/KavoUI.lua")()</code></pre>
 
-        <pre><code>local Kavo = loadfile("/storage/emulated/0/Download/KavoUI.lua")()</code></pre>
-      </section>
+        <h3>Online via GitHub</h3>
+        <pre><code>local function import(url)
+    return load(gg.makeRequest(url).content)()
+end
 
-      <!-- STRUCTURE OVERVIEW -->
-      <section>
-        <h2 data-en="Structure Overview" data-pt="Visão Geral da Estrutura">Structure Overview</h2>
+Kavo = import("https://raw.githubusercontent.com/LiverMods/KavoGG/refs/heads/main/KavoUi.lua")</code></pre>
+    </section>
 
-        <p data-en="A window contains tabs. Each tab contains sections. Sections contain elements such as buttons, toggles, sliders and inputs."
-           data-pt="Uma janela contém abas. Cada aba possui seções. Cada seção contém elementos como botões, toggles, sliders e inputs.">
-        </p>
+    <section>
+        <h2>🧩 Basic Usage</h2>
 
-        <pre><code>local win = Kavo:CreateWindow("My Menu")
-local tab = win:CreateTab("Main")
-local sec = tab:CreateSection("Features")</code></pre>
-      </section>
+        <h3>Create a window</h3>
+        <pre><code>local UI = Kavo:CreateWindow("My Menu")</code></pre>
 
-      <!-- ELEMENTS -->
-      <section>
-        <h2 data-en="Elements" data-pt="Elementos">Elements</h2>
+        <h3>Create a tab</h3>
+        <pre><code>local tab = UI:CreateTab("Main")</code></pre>
 
-        <h3 data-en="Button" data-pt="Button">Button</h3>
-        <p data-en="Executes a callback when selected." data-pt="Executa uma função quando selecionado."></p>
+        <h3>Create a section</h3>
+        <pre><code>local sec = tab:CreateSection("Features")</code></pre>
+
+        <h3>Button</h3>
         <pre><code>sec:AddButton("God Mode", function()
-    gg.toast("Activated")
+    gg.toast("God Mode Activated!")
 end)</code></pre>
 
-        <h3 data-en="Toggle" data-pt="Toggle">Toggle</h3>
-        <p data-en="Binary ON/OFF switch. Shows emojis and stores its state while script runs."
-           data-pt="Interruptor ON/OFF. Mostra emojis e mantém o estado enquanto o script roda."></p>
+        <h3>Toggle</h3>
         <pre><code>sec:AddToggle("Speed", false, function(state)
-    gg.toast("Speed: "..tostring(state))
+    gg.toast("Speed: " .. tostring(state))
 end)</code></pre>
 
-        <h3 data-en="Slider" data-pt="Slider">Slider</h3>
-        <p data-en="Requests a numeric value within a range." data-pt="Solicita um valor numérico dentro de um intervalo."></p>
-        <pre><code>sec:AddSlider("FOV", 10, 120, 60, function(v)
-    gg.toast("FOV = "..v)
+        <h3>Slider</h3>
+        <pre><code>sec:AddSlider("FOV", 10, 120, 60, function(value)
+    gg.toast("FOV = " .. value)
 end)</code></pre>
 
-        <h3 data-en="Input" data-pt="Input">Input</h3>
-        <p data-en="Requests free text input from the user." data-pt="Solicita entrada de texto do usuário."></p>
-        <pre><code>sec:AddInput("Player Name", "User", function(name)
-    gg.toast("Name: "..name)
+        <h3>Input</h3>
+        <pre><code>sec:AddInput("Player Name", "User", function(text)
+    gg.toast("Name set to: " .. text)
 end)</code></pre>
-      </section>
 
-      <!-- DISPLAY -->
-      <section>
-        <h2 data-en="Displaying the Menu" data-pt="Exibindo o Menu">Displaying the Menu</h2>
+        <h3>Show UI (Floating Menu)</h3>
+        <pre><code>UI:Show()</code></pre>
+    </section>
 
-        <p data-en="The menu becomes accessible via the GameGuardian floating button. Press it to open or hide the UI."
-           data-pt="O menu fica acessível pelo botão flutuante do GameGuardian. Pressione para abrir ou ocultar.">
-        </p>
+    <section>
+        <h2>📚 Examples</h2>
 
-        <pre><code>win:Show()</code></pre>
-      </section>
+        <h3>1) Complete basic example</h3>
+        <p>Copy this whole script into a file and run it in GameGuardian (adjust the path to KavoUI.lua if needed).</p>
+        <pre><code>-- Basic example using local KavoUI.lua
+local Kavo = loadfile("/storage/emulated/0/Download/KavoUI.lua")()
+Kavo:Welcome("") -- optional: default welcome alert
 
-      <!-- WELCOME -->
-      <section>
-        <h2 data-en="Welcome Alert (Optional)" data-pt="Alerta de Boas-Vindas (Opcional)">Welcome Alert (Optional)</h2>
+local win = Kavo:CreateWindow("My Menu")
+local mainTab = win:CreateTab("Main")
+local general = mainTab:CreateSection("General")
 
-        <pre><code>Kavo:Welcome("")   -- Default message
-Kavo:Welcome(nil) -- No alert
-Kavo:Welcome("Your custom message")</code></pre>
-      </section>
+general:AddButton("Say Hello", function()
+    gg.toast("Hello from KavoUI!")
+end)
 
-      <!-- DOWNLOAD -->
-      <section>
-        <h2 data-en="Download" data-pt="Download">Download</h2>
-        <p data-en="Use the button above to download the latest version of KavoUI.lua."
-           data-pt="Use o botão acima para baixar a versão mais recente do KavoUI.lua.">
-        </p>
-      </section>
+general:AddToggle("Fast Mode", false, function(state)
+    gg.toast("Fast Mode -> " .. tostring(state))
+end)
 
-      <footer>
-        <p data-en="© 2025 KavoUI GG — Open Source" data-pt="© 2025 KavoUI GG — Código Aberto">© 2025 KavoUI GG — Open Source</p>
-      </footer>
+general:AddSlider("FOV", 10, 120, 60, function(v)
+    gg.toast("FOV set to " .. v)
+end)
 
-    </article>
-  </main>
+general:AddInput("Player Name", "Player", function(name)
+    gg.toast("Player name: " .. name)
+end)
 
-  <script>
-    const flagUS = document.getElementById("flag-us");
-    const flagBR = document.getElementById("flag-br");
-    const elements = document.querySelectorAll("[data-en]");
+win:Show()</code></pre>
 
-    function setLang(lang) {
-      elements.forEach(el => {
-        const txt = el.dataset[lang];
-        if (txt !== undefined) el.innerText = txt;
-      });
+        <h3>2) Dynamic submenu example (pushMenu)</h3>
+        <p>Shows how to open a runtime menu and push nested menus.</p>
+        <pre><code>-- Dynamic submenu example
+local Kavo = loadfile("/storage/emulated/0/Download/KavoUI.lua")()
+local win = Kavo:CreateWindow("Dynamic Demo")
+local t = win:CreateTab("Tools")
+local s = t:CreateSection("Actions")
 
-      flagUS.classList.toggle('active', lang === 'en');
-      flagBR.classList.toggle('active', lang === 'pt');
-    }
+s:AddButton("Open submenu", function()
+    win:pushMenu({
+        title = "Runtime Menu",
+        options = {
+            { text = "Option A", action = function() gg.toast("Option A selected") end },
+            { text = "Open deeper", action = function()
+                win:pushMenu({
+                    title = "Deeper Menu",
+                    options = {
+                        { text = "Deep 1", action = function() gg.toast("Deep 1") end },
+                        { text = "Deep 2", action = function() gg.toast("Deep 2") end },
+                    }
+                })
+            end},
+            { text = "Back to UI", action = function() win:backMenu() end },
+        }
+    })
+end)
 
-    flagUS.onclick = () => setLang('en');
-    flagBR.onclick = () => setLang('pt');
+win:Show()</code></pre>
+    </section>
 
-    setLang('en');
-  </script>
+    <section>
+        <h2>📢 Welcome Message (Optional)</h2>
+        <p>There are three modes:</p>
+
+        <pre><code>Kavo:Welcome(nil)        -- no alert
+Kavo:Welcome("")         -- default alert
+Kavo:Welcome("Hello!")   -- custom alert</code></pre>
+    </section>
+
+    <section>
+        <h2>📘 Full Documentation</h2>
+        <p>A complete documentation website is available here:</p>
+        <p><strong>(Add your GitHub Pages link here)</strong></p>
+    </section>
+
+    <footer>
+        <p>© 2025 KavoUI-GG — Open Source 🙂‍↕️</p>
+    </footer>
 
 </body>
 </html>
