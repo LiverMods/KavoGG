@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #0d0f12;
+    color: #e3e3e3;
+}
+
+header {
+    background: #161a1f;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #222831;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.lang-switch {
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.flag {
+    opacity: 0.4;
+    transition: 0.2s;
+}
+
+.flag.active {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+.download-btn {
+    padding: 12px 25px;
+    background: #4e8cff;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.download-btn:hover {
+    background: #3b6ed1;
+}
+
+.content {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px;
+}
+
+.content h2 {
+    margin-bottom: 15px;
+}
+
+ul {
+    margin-left: 20px;
+    line-height: 28px;
+}
+
+pre {
+    background: #111417;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin-bottom: 25px;
+    border: 1px solid #1e242b;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.6;
+    font-size: 14px;
+}

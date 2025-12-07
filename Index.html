@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>KavoUI GG — Documentation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">KavoUI GG</div>
+
+    <div class="lang-switch">
+      <img src="https://flagsapi.com/US/flat/32.png" id="flag-us" class="flag active" alt="EN">
+      <img src="https://flagsapi.com/BR/flat/32.png" id="flag-br" class="flag" alt="PT">
+    </div>
+  </header>
+
+  <main class="content">
+    <article class="card">
+      <h1 data-en="KavoUI for GameGuardian" data-pt="KavoUI para GameGuardian">KavoUI for GameGuardian</h1>
+      <p data-en="A compact floating UI library for GameGuardian scripts. Provides hierarchical navigation (stack), toggles, sliders, inputs and non-blocking floating operation via the GG UI button."
+         data-pt="Uma biblioteca UI flutuante e compacta para scripts do GameGuardian. Fornece navegação hierárquica (stack), toggles, sliders, inputs e operação não bloqueante através do botão flutuante do GG.">
+      </p>
+
+      <section>
+        <h2 data-en="Quick facts" data-pt="Resumo rápido">Quick facts</h2>
+        <ul>
+          <li data-en="Activates with GG floating button (non-modal)" data-pt="Ativa com o botão flutuante do GG (não modal)">Activates with GG floating button (non-modal)</li>
+          <li data-en="Navigation stack: push / pop submenus" data-pt="Pilha de navegação: push / pop de submenus">Navigation stack: push / pop submenus</li>
+          <li data-en="Toggles ask confirmation and persist in memory while script runs" data-pt="Toggles pedem confirmação e persistem na memória enquanto o script roda">Toggles ask confirmation and persist in memory while script runs</li>
+          <li data-en="Sliders and inputs validate and do not close UI on cancel" data-pt="Sliders e inputs possuem validação e não fecham a UI ao cancelar">Sliders and inputs validate and do not close UI on cancel</li>
+          <li data-en="Download KavoUI.lua from this page" data-pt="Baixe o KavoUI.lua nesta página">Download KavoUI.lua from this page</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 data-en="Installation" data-pt="Instalação">Installation</h2>
+        <p data-en="Save the file named <code>KavoUI.lua</code> to your device. Recommended path: <code>/storage/emulated/0/Download/KavoUI.lua</code>. Then in your script call <code>loadfile</code> as shown in examples."
+           data-pt="Salve o arquivo com o nome <code>KavoUI.lua</code> no seu dispositivo. Caminho recomendado: <code>/storage/emulated/0/Download/KavoUI.lua</code>. Em seguida carregue com <code>loadfile</code> conforme os exemplos.">
+        </p>
+      </section>
+
+      <section>
+        <h2 data-en="How it works (brief)" data-pt="Como funciona (resumo)">How it works (brief)</h2>
+        <p data-en="The library opens a non-modal menu driven by the GameGuardian floating button. Menus are displayed using GG's blocking choices, but the script manages state so the game remains usable while the menu is hidden. The library provides two concepts: structural UI (windows, tabs, sections) and dynamic menu stack (push/pop) that allows submenus defined at runtime."
+           data-pt="A biblioteca abre um menu não modal acionado pelo botão flutuante do GG. As telas do GG são utilizadas para exibir escolhas, mas a biblioteca gerencia estado de forma que o jogo permaneça utilizável quando o menu está oculto. Existem dois conceitos: UI estrutural (window, tabs, sections) e stack dinâmico (push/pop) para submenus em tempo de execução.">
+        </p>
+      </section>
+
+      <section>
+        <h2 data-en="API Reference" data-pt="Referência da API">API Reference</h2>
+
+        <h3 data-en="Loading the library" data-pt="Carregando a biblioteca">Loading the library</h3>
+        <pre><code>local UI = loadfile("/storage/emulated/0/Download/KavoUI.lua")()</code></pre>
+        <p data-en="This returns the module table. Use this variable to create windows and call functions." data-pt="Retorna a tabela do módulo. Use essa variável para criar janelas e chamar funções."></p>
+
+        <h3 data-en="Window, Tabs and Sections" data-pt="Window, Tabs e Sections">Window, Tabs and Sections</h3>
+        <pre><code>local win = UI:CreateWindow("Title")
+local tab = win:CreateTab("Tab name")
+local sec = tab:CreateSection("Section name")</code></pre>
+        <p data-en="Create a single window, then add tabs. Each tab contains sections. Sections hold elements (buttons, toggles, sliders, inputs)." data-pt="Crie uma janela, adicione tabs e sections. Sections contêm elementos (button, toggle, slider, input)."></p>
+
+        <h3 data-en="Elements" data-pt="Elementos">Elements</h3>
+
+        <h4 data-en="Button" data-pt="Button">Button</h4>
+        <p data-en="Adds a selectable action. Callback is executed with no arguments." data-pt="Adiciona uma ação selecionável. O callback é executado sem argumentos."></p>
+        <pre><code>sec:AddButton("Label", function()
+  -- code runs when selected
+end)</code></pre>
+
+        <h4 data-en="Toggle" data-pt="Toggle">Toggle</h4>
+        <p data-en="Binary switch. The library requests confirmation before changing state. Callback receives the new boolean state (true = ON, false = OFF)." data-pt="Interruptor binário. A biblioteca pede confirmação antes de alternar. O callback recebe o novo estado booleano (true = ON, false = OFF)."></p>
+        <pre><code>sec:AddToggle("Enable feature", false, function(state)
+  -- state: boolean
+end)</code></pre>
+        <ul>
+          <li data-en="Default: boolean (false if omitted)" data-pt="Padrão: booleano (false se omitido)">Default: boolean (false if omitted)</li>
+          <li data-en="Behavior: asks 'Sim/Não' before toggle and shows toast with emoji" data-pt="Comportamento: pede 'Sim/Não' antes e mostra toast com emoji">Behavior: asks 'Sim/Não' before toggle and shows toast with emoji</li>
+        </ul>
+
+        <h4 data-en="Slider" data-pt="Slider">Slider</h4>
+        <p data-en="Numeric input with range. Prompts a number and validates it within min/max. Callback receives the numeric value." data-pt="Entrada numérica com intervalo. Solicita um número e valida entre min/max. O callback recebe o valor numérico."></p>
+        <pre><code>sec:AddSlider("FOV", 10, 120, 60, function(value)
+  -- value: number (10..120)
+end)</code></pre>
+        <ul>
+          <li data-en="If user cancels the prompt, the previous value remains." data-pt="Se o usuário cancelar, o valor anterior permanece.">If user cancels the prompt, the previous value remains.</li>
+        </ul>
+
+        <h4 data-en="Input" data-pt="Input">Input</h4>
+        <p data-en="Free text input. Prompts a text field. Callback receives the string. Canceling returns to the menu without changes." data-pt="Entrada de texto livre. Solicita texto. O callback recebe a string. Cancelar retorna ao menu sem alterações."></p>
+        <pre><code>sec:AddInput("Player name", "Player", function(text)
+  -- text: string
+end)</code></pre>
+
+        <h3 data-en="Menu control and display" data-pt="Controles e exibição do menu">Menu control and display</h3>
+        <p data-en="After building the UI call <code>win:Show()</code>. The library uses the GG floating button; press it to open the menu. To hide the menu, tap the GG floating button again or select '↩ Voltar' to step back through the hierarchy." data-pt="Após construir a UI chame <code>win:Show()</code>. A biblioteca usa o botão flutuante do GG; pressione-o para abrir o menu. Para ocultar, pressione o botão flutuante novamente ou selecione '↩ Voltar' para voltar na hierarquia."></p>
+        <pre><code>win:Show()</code></pre>
+
+        <h3 data-en="Stack API (dynamic menus)" data-pt="API Stack (menus dinâmicos)">Stack API (dynamic menus)</h3>
+        <p data-en="The stack API allows constructing context menus at runtime and pushing them onto a stack. Use this to create nested flows without predefining sections." data-pt="A API de stack permite construir menus contextuais em tempo de execução e empilhá-los. Use para criar fluxos aninhados sem definir sections previamente."></p>
+        <pre><code>-- push a menu
+win:pushMenu({
+  title = "Submenu",
+  options = {
+    { text = "Action A", action = function() gg.toast("A") end },
+    { text = "Open more", action = function()
+        win:pushMenu({ title="More", options = { {text="X", action=function() end}, } })
+    end }
+  }
+})
+
+-- open a menu replacing the stack
+win:openMenu(menuTable)
+
+-- back one level
+win:backMenu()</code></pre>
+
+      </section>
+
+      <section>
+        <h2 data-en="Examples" data-pt="Exemplos">Examples</h2>
+
+        <h3 data-en="Basic example" data-pt="Exemplo básico">Basic example</h3>
+        <pre><code>local UI = loadfile("/storage/emulated/0/Download/KavoUI.lua")()
+UI:Welcome("") -- optional welcome alert (empty string = default message)
+
+local win = UI:CreateWindow("My Menu")
+local tab = win:CreateTab("Main")
+local sec = tab:CreateSection("General")
+
+sec:AddButton("Say hi", function() gg.toast("Hello") end)
+sec:AddToggle("Fast mode", false, function(state) gg.toast("Fast: "..tostring(state)) end)
+sec:AddSlider("FOV", 10, 120, 60, function(v) gg.toast("FOV "..v) end)
+sec:AddInput("Name", "Player", function(s) gg.toast("Name: "..s) end)
+
+win:Show()</code></pre>
+
+        <h3 data-en="Dynamic submenu example" data-pt="Exemplo submenu dinâmico">Dynamic submenu example</h3>
+        <pre><code>local UI = loadfile("/storage/emulated/0/Download/KavoUI.lua")()
+local win = UI:CreateWindow("Dynamic example")
+local t = win:CreateTab("Main")
+local s = t:CreateSection("Tools")
+s:AddButton("Open dynamic menu", function()
+  win:pushMenu({
+    title = "Dynamic Menu",
+    options = {
+      { text = "Option 1", action = function() gg.toast("Option 1") end },
+      { text = "Back to UI", action = function() win:backMenu() end }
+    }
+  })
+end)
+
+win:Show()</code></pre>
+
+      </section>
+
+      <section>
+        <h2 data-en="Behavior details and edge cases" data-pt="Comportamento e casos especiais">Behavior details and edge cases</h2>
+        <ul>
+          <li data-en="Clicking outside a GG choice/prompt is handled: library treats it as selecting the last option (usually '↩ Voltar' or '❌ Sair') so the script does not terminate." data-pt="Clicar fora de um gg.choice/gg.prompt é tratado: a biblioteca assume a seleção da última opção (normalmente '↩ Voltar' ou '❌ Sair'), evitando que o script termine.">Clicking outside is handled to avoid script termination.</li>
+          <li data-en="Toggle confirmation prevents accidental state changes in the middle of gameplay." data-pt="A confirmação em toggles previne mudança acidental durante o jogo.">Toggle confirmation prevents accidental changes.</li>
+          <li data-en="Slider and Input prompts are modal when visible, but the floating button hides the menu (non-blocking overall)." data-pt="Slider e Input usam prompts modais, porém a operação global é não bloqueante graças ao botão flutuante.">Slider/Input prompts are modal but overall non-blocking.</li>
+          <li data-en="All callbacks are executed with pcall. Errors inside a callback will show a toast instead of crashing the script." data-pt="Todos os callbacks são chamados com pcall. Erros mostram toast em vez de fechar o script.">Callbacks executed with pcall to prevent crashes.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 data-en="Security and network note" data-pt="Segurança e rede">Security and network note</h2>
+        <p data-en="The library itself does not perform network requests. Some third-party scripts may call gg.makeRequest() to validate licenses or fetch remote data. A network prompt in a script may be legitimate (license check) or unnecessary. Inspect code before granting internet-related behavior. The library cannot and will not access other apps' data or system-level credentials." data-pt="A própria biblioteca não executa requisições de rede. Alguns scripts de terceiros podem chamar gg.makeRequest() para validar licença ou buscar dados remotos. Um pedido de acesso à internet pode ser legítimo (verificação de licença) ou desnecessário. Inspecione o código antes de permitir. A biblioteca não acessa dados de outros apps ou credenciais do sistema."></p>
+      </section>
+
+      <section>
+        <h2 data-en="Troubleshooting" data-pt="Solução de problemas">Troubleshooting</h2>
+        <ul>
+          <li data-en="If win:Show() appears to close immediately, ensure the GG floating button is visible and that you tap it to open the menu. Do not use require(); use loadfile()." data-pt="Se win:Show() fechar imediatamente, verifique se o botão flutuante do GG está visível e toque nele para abrir. Não use require(); use loadfile().">Floating button must be used to open menu; use loadfile not require.</li>
+          <li data-en="If a toggle does not change visually, check that your callback does not error (errors are shown as toasts)." data-pt="Se um toggle não atualizar, verifique se seu callback não está causando erro (erros são mostrados via toast).">Check callbacks for errors.</li>
+          <li data-en="When saving files to device, ensure GG and the file path have write permissions." data-pt="Ao salvar arquivos no dispositivo, garanta permissões de escrita para o caminho usado.">Ensure write permissions for file operations.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 data-en="File download" data-pt="Download do arquivo">File download</h2>
+        <p data-en="Use the 'Download Library' button at the top to get the current KavoUI.lua file. Save it to the recommended path and reference it with loadfile." data-pt="Use o botão 'Download Library' no topo para obter o KavoUI.lua atual. Salve no caminho recomendado e carregue com loadfile."></p>
+      </section>
+
+      <footer>
+        <p data-en="© 2025 KavoUI GG — Educational use only" data-pt="© 2025 KavoUI GG — Uso educacional apenas">© 2025 KavoUI GG — Educational use only</p>
+      </footer>
+    </article>
+  </main>
+
+  <script>
+    const flagUS = document.getElementById("flag-us");
+    const flagBR = document.getElementById("flag-br");
+    const elements = document.querySelectorAll("[data-en]");
+
+    function setLang(lang) {
+      elements.forEach(el => {
+        const txt = el.dataset[lang];
+        if (txt !== undefined) el.innerText = txt;
+      });
+      if (lang === 'en') {
+        flagUS.classList.add('active');
+        flagBR.classList.remove('active');
+      } else {
+        flagBR.classList.add('active');
+        flagUS.classList.remove('active');
+      }
+    }
+
+    flagUS.onclick = () => setLang('en');
+    flagBR.onclick = () => setLang('pt');
+
+    // Initialize language
+    setLang('en');
+  </script>
+</body>
+</html>
